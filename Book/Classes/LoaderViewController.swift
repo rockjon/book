@@ -63,10 +63,13 @@ class LoaderViewController: BaseViewController {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: animationDuration, animations: {
             self.view.backgroundColor = UIColor.white.withAlphaComponent(0.90)
+        }) { (animated) in
+            self.makeRequest(method: .get, returnType: .Books)
+        }
+        UIView.transition(with: animation, duration: animationDuration, options: .transitionCrossDissolve, animations: {
             self.animation.isHidden = false
         }) { (animated) in
             self.animation.play()
-            self.makeRequest(method: .get, returnType: .Books)
         }
     }
 }
@@ -99,14 +102,38 @@ extension LoaderViewController {
 //MARK: Connection Logic
 extension LoaderViewController {
     func makeRequest(method: HTTPMethod, returnType: LoadInfoType) {
-        ConnectionManager.getBooks { (dataSource) in
-            if (dataSource != nil) {
-                print("Ok")
-                self.books = dataSource
-            } else {
-                print("Error")
+        if method == .get {
+            switch returnType {
+            case .Authors:
+                ConnectionManager.getArray(of: returnType) { (dataSource) in
+                    if (dataSource != nil) {
+                        self.authors = dataSource as! [AuthorModel]?
+                    } else {
+                        print("Bad Request")
+                    }
+                    self.prepareAndDismiss()
+                }
+                break
+            case .Books:
+                ConnectionManager.getBooks { (dataSource) in
+                    if (dataSource != nil) {
+                        print("Ok")
+                        self.books = dataSource
+                    } else {
+                        print("Error")
+                    }
+                    self.prepareAndDismiss()
+                }
+                break
+            case .Activities:
+                break
+            case .Author:
+                break
+            case .Book:
+                break
+            case .Activity:
+                break
             }
-            self.prepareAndDismiss()
         }
     }
 }
@@ -115,8 +142,10 @@ extension LoaderViewController {
 extension LoaderViewController {
     func prepareAndDismiss () {
         animation.stop()
-        UIView.animate(withDuration: animationDuration, animations: {
+        UIView.transition(with: animation, duration: animationDuration, options: .transitionCrossDissolve, animations: {
             self.animation.isHidden = true
+        }, completion: nil)
+        UIView.animate(withDuration: animationDuration, animations: {
             self.view.backgroundColor = .clear
         }) { (animated) in
             self.delegate?.dismissView(animated: true)

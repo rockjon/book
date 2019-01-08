@@ -192,6 +192,14 @@ class PrincipalPageViewController: BaseViewController {
         contentViewForActivities.frame = contentViewForBooks.frame
         contentViewForActivities.center.x = contentViewForBooks.center.x + view.frame.width
     }
+    
+    //MARK: Life Cycle
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getDataSources()
+    }
 }
 
 //MARK: UI Elements Actions
@@ -307,3 +315,16 @@ extension PrincipalPageViewController: LoaderViewControllerDelegate {
         navigationController?.dismiss(animated: animated, completion: nil)
     }
 }
+
+//MARK: DataSources request management
+extension PrincipalPageViewController {
+    func getDataSources () {
+        let loader = LoaderViewController()
+        loader.delegate = self
+        loader.modalPresentationStyle = .overCurrentContext
+        loader.setInfo(method: .get, type: .Authors)
+        navigationController?.present(loader, animated: true, completion: nil)
+    }
+}
+
+//Add Requested Type to LoaderViewController for casting at delegate implementation and refresh tables
