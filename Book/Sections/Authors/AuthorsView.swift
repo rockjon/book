@@ -10,16 +10,17 @@ import Foundation
 import UIKit
 
 class AuthorsView: UITableView {
+    private var context: UIViewController!
     private var viewFrame: CGRect!
-    
     var authors: [AuthorModel]? = []
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
     }
     
-    func setupInfo (viewFrame: CGRect) {
-        self.viewFrame = viewFrame
+    func setupInfo (context: UIViewController) {
+        self.context = context
+        self.viewFrame = self.context.view.frame
         backgroundColor = .clear
         register(AuthorTableViewCell.self, forCellReuseIdentifier: AuthorTableViewCell.ID)
         rowHeight = 85
@@ -27,10 +28,40 @@ class AuthorsView: UITableView {
         allowsSelection = false
         delegate = self
         dataSource = self
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refreshDataSource), for: .valueChanged)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: DataSource Management
+extension AuthorsView {
+    @objc func refreshDataSource () {
+        print("Refreshing...")
+        let loaderViewController = LoaderViewController()
+        loaderViewController.modalPresentationStyle = .overCurrentContext
+        loaderViewController.delegate = self
+        loaderViewController.setInfo(method: .get, type: .Authors)
+        context.navigationController?.present(loaderViewController, animated: true, completion: {
+            self.refreshControl?.endRefreshing()
+        })
+    }
+}
+
+//MARK: LoaderDelegate Management
+extension AuthorsView: LoaderViewControllerDelegate {
+    func dismissView(animated: Bool) {
+        let loaderViewController = context.navigationController?.presentedViewController as! LoaderViewController
+        let array = loaderViewController.getArrayDataSource()
+        if array != nil {
+            authors = array as! [AuthorModel]?
+            reloadDataWithAnimation()
+        }
+        context.navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 

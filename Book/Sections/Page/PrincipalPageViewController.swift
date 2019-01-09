@@ -114,10 +114,10 @@ class PrincipalPageViewController: BaseViewController {
         
         //MARK: ContentView
         contentViewForAuthors = AuthorsView()
-        contentViewForAuthors.setupInfo(viewFrame: view.frame)
+        contentViewForAuthors.setupInfo(context: self)
         
         contentViewForBooks = BooksView()
-        contentViewForBooks.setupInfo(viewFrame: view.frame)
+        contentViewForBooks.setupInfo(context: self)
         
         contentViewForActivities = UIView()
         contentViewForActivities.backgroundColor = .white
@@ -194,10 +194,8 @@ class PrincipalPageViewController: BaseViewController {
     }
     
     //MARK: Life Cycle
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getDataSources()
     }
 }
@@ -215,7 +213,6 @@ extension PrincipalPageViewController {
     
     @objc func setBooksContent() {
         print("Setting Books")
-        getBooksDataSource()
         labelAuthors.textColor = .GRAY
         labelBooks.textColor = .white
         labelActivities.textColor = .GRAY
@@ -293,38 +290,18 @@ extension PrincipalPageViewController {
 
 //MARK: DataSources Management
 extension PrincipalPageViewController {
-    func getBooksDataSource () {
-        let loader = LoaderViewController()
-        loader.delegate = self
-        loader.modalPresentationStyle = .overCurrentContext
-        loader.setInfo(method: .get, type: .Books)
-        navigationController?.present(loader, animated: true, completion: nil)
-    }
-}
-
-//MARK: LoaderViewControllerManagement
-extension PrincipalPageViewController: LoaderViewControllerDelegate {
-    func dismissView(animated: Bool) {
-        let vc = navigationController?.presentedViewController as! LoaderViewController
-        if vc.getBooks() != nil {
-            contentViewForBooks.books = vc.getBooks()
-            let range = NSMakeRange(0, contentViewForBooks.numberOfSections)
-            let sections = NSIndexSet(indexesIn: range)
-            contentViewForBooks.reloadSections(sections as IndexSet, with: .automatic)
-        }
-        navigationController?.dismiss(animated: animated, completion: nil)
-    }
-}
-
-//MARK: DataSources request management
-extension PrincipalPageViewController {
     func getDataSources () {
-        let loader = LoaderViewController()
-        loader.delegate = self
-        loader.modalPresentationStyle = .overCurrentContext
-        loader.setInfo(method: .get, type: .Authors)
-        navigationController?.present(loader, animated: true, completion: nil)
+        ConnectionManager.getArray(of: .Authors) { (array) in
+            if array != nil {
+                self.contentViewForAuthors.authors = array as! [AuthorModel]?
+                self.contentViewForAuthors.reloadDataWithAnimation()
+            }
+        }
+        ConnectionManager.getArray(of: .Books) { (array) in
+            if array != nil {
+                self.contentViewForBooks.books = array as! [BookModel]?
+                self.contentViewForBooks.reloadDataWithAnimation()
+            }
+        }
     }
 }
-
-//Add Requested Type to LoaderViewController for casting at delegate implementation and refresh tables

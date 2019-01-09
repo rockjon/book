@@ -29,12 +29,8 @@ class LoaderViewController: BaseViewController {
     let animationDuration: TimeInterval = 1
     
     //MARK: DataSources
-    var author: AuthorModel?
-    var authors: [AuthorModel]?
-    var book: BookModel?
-    var books: [BookModel]?
-    var activity: ActivityModel?
-    var activities: [ActivityModel]?
+    var dataSource: Any?
+    var arrayDataSource: [Any]?
     
     //MARK: UI Elements
     var animation: LOTAnimationView! = LOTAnimationView()
@@ -64,7 +60,7 @@ class LoaderViewController: BaseViewController {
         UIView.animate(withDuration: animationDuration, animations: {
             self.view.backgroundColor = UIColor.white.withAlphaComponent(0.90)
         }) { (animated) in
-            self.makeRequest(method: .get, returnType: .Books)
+            self.makeRequest(method: .get, returnType: self.infoType)
         }
         UIView.transition(with: animation, duration: animationDuration, options: .transitionCrossDissolve, animations: {
             self.animation.isHidden = false
@@ -94,8 +90,12 @@ extension LoaderViewController {
 
 //MARK: Get Data Source
 extension LoaderViewController {
-    func getBooks() -> [BookModel]? {
-        return books
+    func getDataSource () -> Any? {
+        return dataSource
+    }
+    
+    func getArrayDataSource () -> [Any]? {
+        return arrayDataSource
     }
 }
 
@@ -103,36 +103,11 @@ extension LoaderViewController {
 extension LoaderViewController {
     func makeRequest(method: HTTPMethod, returnType: LoadInfoType) {
         if method == .get {
-            switch returnType {
-            case .Authors:
-                ConnectionManager.getArray(of: returnType) { (dataSource) in
-                    if (dataSource != nil) {
-                        self.authors = dataSource as! [AuthorModel]?
-                    } else {
-                        print("Bad Request")
-                    }
-                    self.prepareAndDismiss()
+            ConnectionManager.getArray(of: returnType) { (array) in
+                if array != nil {
+                    self.arrayDataSource = array
                 }
-                break
-            case .Books:
-                ConnectionManager.getBooks { (dataSource) in
-                    if (dataSource != nil) {
-                        print("Ok")
-                        self.books = dataSource
-                    } else {
-                        print("Error")
-                    }
-                    self.prepareAndDismiss()
-                }
-                break
-            case .Activities:
-                break
-            case .Author:
-                break
-            case .Book:
-                break
-            case .Activity:
-                break
+                self.prepareAndDismiss()
             }
         }
     }
