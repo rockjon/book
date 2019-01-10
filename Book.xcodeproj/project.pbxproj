@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DF716C721E6F29A008F1DA8 /* ActivitiesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF716C521E6F29A008F1DA8 /* ActivitiesCollectionViewCell.swift */; };
+		0DF716C821E6F29A008F1DA8 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF716C621E6F29A008F1DA8 /* ActivitiesView.swift */; };
 		7F56A42B21E1EBAF00F3588F /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56A42A21E1EBAF00F3588F /* Enums.swift */; };
 		7F56A42D21E1EC5200F3588F /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56A42C21E1EC5200F3588F /* ExtensionUILabel.swift */; };
 		7F56A42F21E29C1600F3588F /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56A42E21E29C1600F3588F /* BookTableViewCell.swift */; };
@@ -25,7 +27,6 @@
 		7F7C6C1021E14C3600C10C84 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C6C0F21E14C3600C10C84 /* ExtensionUIButton.swift */; };
 		7F7C6C1321E1598800C10C84 /* PrincipalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C6C1221E1598800C10C84 /* PrincipalPageViewController.swift */; };
 		7F7C6C1821E15F0E00C10C84 /* AuthorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C6C1721E15F0E00C10C84 /* AuthorsView.swift */; };
-		7F7C6C1C21E15FF700C10C84 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C6C1B21E15FF700C10C84 /* ActivitiesView.swift */; };
 		7FE0799121E3078A0037E4B9 /* AuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE0799021E3078A0037E4B9 /* AuthorTableViewCell.swift */; };
 		7FE0799321E317BA0037E4B9 /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE0799221E317BA0037E4B9 /* LoaderViewController.swift */; };
 		7FE0799821E31CF40037E4B9 /* Shining-Books.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FE0799521E31CF40037E4B9 /* Shining-Books.json */; };
@@ -42,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DF716C521E6F29A008F1DA8 /* ActivitiesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesCollectionViewCell.swift; sourceTree = "<group>"; };
+		0DF716C621E6F29A008F1DA8 /* ActivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		733B5D60EDA3D2E527CE2A22 /* Pods_Book.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Book.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74267950911CF333929AD65B /* Pods-Book.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Book/Pods-Book.debug.xcconfig"; sourceTree = "<group>"; };
 		7F56A42A21E1EBAF00F3588F /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -64,7 +67,6 @@
 		7F7C6C0F21E14C3600C10C84 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		7F7C6C1221E1598800C10C84 /* PrincipalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalPageViewController.swift; sourceTree = "<group>"; };
 		7F7C6C1721E15F0E00C10C84 /* AuthorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsView.swift; sourceTree = "<group>"; };
-		7F7C6C1B21E15FF700C10C84 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		7FE0799021E3078A0037E4B9 /* AuthorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorTableViewCell.swift; sourceTree = "<group>"; };
 		7FE0799221E317BA0037E4B9 /* LoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewController.swift; sourceTree = "<group>"; };
 		7FE0799521E31CF40037E4B9 /* Shining-Books.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Shining-Books.json"; sourceTree = "<group>"; };
@@ -227,7 +229,8 @@
 		7F7C6C1621E15EB100C10C84 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
-				7F7C6C1B21E15FF700C10C84 /* ActivitiesView.swift */,
+				0DF716C521E6F29A008F1DA8 /* ActivitiesCollectionViewCell.swift */,
+				0DF716C621E6F29A008F1DA8 /* ActivitiesView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -399,7 +402,6 @@
 				7F56A43221E29D0800F3588F /* Stars.swift in Sources */,
 				7F7C6C0A21E1439200C10C84 /* ExtensionsUIViewController.swift in Sources */,
 				7F7C6BEE21E13B7C00C10C84 /* ViewController.swift in Sources */,
-				7F7C6C1C21E15FF700C10C84 /* ActivitiesView.swift in Sources */,
 				7F7C6C1821E15F0E00C10C84 /* AuthorsView.swift in Sources */,
 				7FE079A721E3261F0037E4B9 /* ConnectionManager.swift in Sources */,
 				7F7C6C1321E1598800C10C84 /* PrincipalPageViewController.swift in Sources */,
@@ -411,9 +413,11 @@
 				7FE079A321E31E840037E4B9 /* BookModel.swift in Sources */,
 				7F7C6C1021E14C3600C10C84 /* ExtensionUIButton.swift in Sources */,
 				7FE079A421E31E840037E4B9 /* CoverPhotosModel.swift in Sources */,
+				0DF716C721E6F29A008F1DA8 /* ActivitiesCollectionViewCell.swift in Sources */,
 				7FE0799121E3078A0037E4B9 /* AuthorTableViewCell.swift in Sources */,
 				7F7C6C0721E1439200C10C84 /* ExtensionsUIView.swift in Sources */,
 				7F56A42F21E29C1600F3588F /* BookTableViewCell.swift in Sources */,
+				0DF716C821E6F29A008F1DA8 /* ActivitiesView.swift in Sources */,
 				7F56A42D21E1EC5200F3588F /* ExtensionUILabel.swift in Sources */,
 				7F56A42B21E1EBAF00F3588F /* Enums.swift in Sources */,
 				7FE079A121E31E840037E4B9 /* UserModel.swift in Sources */,

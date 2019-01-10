@@ -16,3 +16,11 @@ extension UITableView {
         self.reloadSections(sections as IndexSet, with: .automatic)
     }
 }
+
+extension UICollectionView {
+    func reloadDataWithAnimation () {
+        let range = NSMakeRange(0, self.numberOfSections)
+        let sections = NSIndexSet(indexesIn: range)
+        self.reloadSections(sections as IndexSet)
+    }
+}
