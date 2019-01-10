@@ -13,4 +13,5 @@ public enum FontType: String {
     case Italic = "Optima-Italic"
     case Bold = "Optima-Bold"
     case BoldItalic = "Optima-BoldItalic"
+    case Medium = "AvenirNext-Medium"
 }

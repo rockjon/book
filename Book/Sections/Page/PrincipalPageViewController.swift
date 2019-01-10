@@ -23,7 +23,7 @@ class PrincipalPageViewController: BaseViewController {
     
     var contentViewForAuthors: AuthorsView!
     var contentViewForBooks: BooksView!
-    var contentViewForActivities: UIView!
+    var contentViewForActivities: ActivitiesView!
     
     var bottomView: UIView!
     var imageProfile: UIImageView!
@@ -119,8 +119,8 @@ class PrincipalPageViewController: BaseViewController {
         contentViewForBooks = BooksView()
         contentViewForBooks.setupInfo(context: self)
         
-        contentViewForActivities = UIView()
-        contentViewForActivities.backgroundColor = .white
+        contentViewForActivities = ActivitiesView()
+        contentViewForActivities.setupInfo(context: self)
     }
     override func addViews() {
         view.addSubview(contentViewForAuthors)
@@ -301,6 +301,12 @@ extension PrincipalPageViewController {
             if array != nil {
                 self.contentViewForBooks.books = array as! [BookModel]?
                 self.contentViewForBooks.reloadDataWithAnimation()
+            }
+        }
+        ConnectionManager.getArray(of: .Activities) { (array) in
+            if array != nil {
+                self.contentViewForActivities.activities = array as! [ActivityModel]?
+                self.contentViewForActivities.reloadDataWithAnimation()
             }
         }
     }

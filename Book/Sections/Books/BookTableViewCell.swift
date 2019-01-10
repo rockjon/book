@@ -37,11 +37,12 @@ class BookTableViewCell: UITableViewCell {
         infoView.backgroundColor = .white
         infoView.layer.cornerRadius = 10
         infoView.addShadow(color: .black)
-        
+        //infoView.clipsToBounds = true
         contentView.addSubview(infoView)
         
         imageBookCover = UIImageView(frame: CGRect(x: 0, y: 0, width: 140, height: 170))
         imageBookCover.backgroundColor = .lightGray
+        
         labelBookTitle = UILabel.getCustomLabel(text: "Book Title", font: .Bold, size: 24, color: .FONT_COLOR, alignment: .left)
         bookStars = Stars(frame: CGRect(x: 150, y: 40, width: 125, height: 15))
         labelAuthor = UILabel.getCustomLabel(text: "Autor:", font: .Bold, size: 16, color: .FONT_COLOR, alignment: .left)
