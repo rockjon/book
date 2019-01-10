@@ -255,6 +255,10 @@ extension PrincipalPageViewController {
         }
         if sender.isEqual(buttonAddBook) {
             print("Adding Book")
+            let createBookVC = CreateBookViewController()
+            createBookVC.delegate = self
+            createBookVC.modalPresentationStyle = .overCurrentContext
+            navigationController?.present(createBookVC, animated: true, completion: nil)
         }
         if sender.isEqual(buttonAddActivity) {
             print("Adding Activity")
@@ -309,5 +313,14 @@ extension PrincipalPageViewController {
                 self.contentViewForActivities.reloadDataWithAnimation()
             }
         }
+    }
+}
+
+//MARK: CreateElementViewDelegate Management
+extension PrincipalPageViewController: CreateElementViewDelegate {
+    func dismissView() {
+        navigationController?.dismiss(animated: true, completion: {
+            self.addButtonPressed()
+        })
     }
 }
