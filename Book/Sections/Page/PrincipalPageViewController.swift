@@ -252,6 +252,11 @@ extension PrincipalPageViewController {
     @objc func add (sender: UIButton) {
         if sender.isEqual(buttonAddAuthor) {
             print("Adding Author")
+            print("Adding Book")
+            let createAuthorVC = CreateAuthorViewController()
+            createAuthorVC.delegate = self
+            createAuthorVC.modalPresentationStyle = .overCurrentContext
+            navigationController?.present(createAuthorVC, animated: true, completion: nil)
         }
         if sender.isEqual(buttonAddBook) {
             print("Adding Book")
@@ -262,6 +267,10 @@ extension PrincipalPageViewController {
         }
         if sender.isEqual(buttonAddActivity) {
             print("Adding Activity")
+            let createActivityVC = CreateActivityViewController()
+            createActivityVC.delegate = self
+            createActivityVC.modalPresentationStyle = .overCurrentContext
+            navigationController?.present(createActivityVC, animated: true, completion: nil)
         }
     }
     
