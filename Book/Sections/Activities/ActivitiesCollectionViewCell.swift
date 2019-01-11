@@ -100,9 +100,9 @@ class ActivitiesCollectionViewCell: UICollectionViewCell {
         infoView.addConstraintsWithFormat(format: "V:[v0]-6-[v1]", views: labelTimeRemain,labelEndDateActivity)
         infoView.addConstraintsWithFormat(format: "H:|-20-[v0]-10-[v1]-20-|", views: labeEndDate,labelEndDateActivity)
         
-        infoView.addConstraintsWithFormat(format: "V:|-[v0(25)]-12-|", views: btnFinish)
-        infoView.addConstraintsWithFormat(format: "V:|-[v0(25)]-12-|", views: btnEdit)
-        infoView.addConstraintsWithFormat(format: "H:|-20-[v0(78)]-40-[v1(23)]-20-|", views: btnFinish,btnEdit)
+        infoView.addConstraintsWithFormat(format: "V:[v0]-[v1(25)]-12-|", views: labeEndDate,btnFinish)
+        infoView.addConstraintsWithFormat(format: "V:[v0]-[v1(25)]-12-|", views: labeEndDate,btnEdit)
+        infoView.addConstraintsWithFormat(format: "H:|-20-[v0(78)]-(0@42)-[v1(23)]-20-|", views: btnFinish,btnEdit)
         
        
         

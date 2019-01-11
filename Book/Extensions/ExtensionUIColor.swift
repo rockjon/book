@@ -18,4 +18,5 @@ extension UIColor {
     public static let LIGHT_PINK = UIColor(white: 198.0 / 255.0, alpha: 1.0)
     public static let OLIVA = UIColor(red: 185.0 / 255.0, green: 188.0 / 255.0, blue: 112.0 / 255.0, alpha: 1.0)
     public static let TRANSPARENT_BLACK = UIColor.black.withAlphaComponent(0.75)
+    public static let GRAY_STRONG = UIColor(white: 112.0 / 255.0, alpha: 1.0)
 }
