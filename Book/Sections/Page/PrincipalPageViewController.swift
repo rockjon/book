@@ -14,6 +14,7 @@ class PrincipalPageViewController: BaseViewController {
     var topView: UIView!
     var imageViewLogo: UIImageView!
     var buttonSearch: UIButton!
+    var viewCurrentPage: UIView!
     var labelAuthors: UILabel!
     var buttonAuthors: UIButton!
     var labelBooks: UILabel!
@@ -198,6 +199,13 @@ class PrincipalPageViewController: BaseViewController {
         super.viewWillAppear(animated)
         getDataSources()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isAddMenuVisible {
+            dismissAddMenu()
+        }
+    }
 }
 
 //MARK: UI Elements Actions
@@ -261,9 +269,10 @@ extension PrincipalPageViewController {
         if sender.isEqual(buttonAddBook) {
             print("Adding Book")
             let createBookVC = CreateBookViewController()
-            createBookVC.delegate = self
-            createBookVC.modalPresentationStyle = .overCurrentContext
-            navigationController?.present(createBookVC, animated: true, completion: nil)
+//            createBookVC.delegate = self
+//            createBookVC.modalPresentationStyle = .overCurrentContext
+//            navigationController?.present(createBookVC, animated: true, completion: nil)
+            navigationController?.pushViewControllerAsPresent(viewController: createBookVC)
         }
         if sender.isEqual(buttonAddActivity) {
             print("Adding Activity")

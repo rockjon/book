@@ -14,6 +14,7 @@ class CreateBookViewController: BaseViewController {
     
     var contentView: UIView!
     var imageViewBookCover: UIImageView!
+    var buttonCamera: UIButton!
     var buttonCancel: UIButton!
     var labelTitle: UILabel!
     var textFieldTitle: UITextField!
@@ -31,7 +32,7 @@ class CreateBookViewController: BaseViewController {
     
     //MARK: Create View
     override func createView() {
-        view.backgroundColor = .clear
+        view.backgroundColor = .PRIMARY_COLOR
         
         contentView = UIView()
         contentView.backgroundColor = .white
@@ -45,6 +46,11 @@ class CreateBookViewController: BaseViewController {
         imageViewBookCover.backgroundColor = UIColor.GRAY
         imageViewBookCover.layer.cornerRadius = 10
         imageViewBookCover.contentMode = .scaleToFill
+        
+        buttonCamera = UIButton()
+        buttonCamera.setImage(UIImage(named: "icPhotoCamera"), for: .normal)
+        buttonCamera.contentMode = .scaleAspectFit
+        buttonCamera.addTarget(self, action: #selector(getPhotoFromCameraRoll), for: .touchUpInside)
         
         labelTitle = UILabel.getCustomLabel(text: "Título:", font: .Bold, size: 15, color: .GRAY, alignment: .left)
         
@@ -127,6 +133,7 @@ class CreateBookViewController: BaseViewController {
         view.addSubview(contentView)
         contentView.addSubview(buttonCancel)
         contentView.addSubview(imageViewBookCover)
+        contentView.addSubview(buttonCamera)
         contentView.addSubview(labelTitle)
         contentView.addSubview(textFieldTitle)
         contentView.addSubview(labelAuthor)
@@ -149,6 +156,9 @@ class CreateBookViewController: BaseViewController {
         
         contentView.addConstraintsWithFormat(format: "V:|-10-[v0(120)]", views: imageViewBookCover)
         contentView.addConstraintsWithFormat(format: "H:|-10-[v0(110)]", views: imageViewBookCover)
+        
+        contentView.addConstraintsWithFormat(format: "V:|-97-[v0(30)]", views: buttonCamera)
+        contentView.addConstraintsWithFormat(format: "H:|-85-[v0(30)]", views: buttonCamera)
         
         contentView.addConstraintsWithFormat(format: "V:[v0]-15-[v1(20)]", views: imageViewBookCover,labelTitle)
         contentView.addConstraintsWithFormat(format: "H:|-10-[v0]-10-|", views: labelTitle)
@@ -192,9 +202,9 @@ class CreateBookViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 1) {
-            self.view.backgroundColor = .TRANSPARENT_BLACK
-        }
+//        UIView.animate(withDuration: 1) {
+//            self.view.backgroundColor = .TRANSPARENT_BLACK
+//        }
     }
 }
 
@@ -208,6 +218,26 @@ extension CreateBookViewController {
         print("Making request for add a new book")
         print("OK")
         prepareViewAndDismiss()
+    }
+    
+    @objc func getPhotoFromCameraRoll () {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            navigationController?.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+}
+
+//MARK: UIIMagePickerControllerDelegat UINavigationControllerDelegateManagement
+extension CreateBookViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        imageViewBookCover.image = image
+        imageViewBookCover.layer.cornerRadius = 10
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -241,10 +271,12 @@ extension CreateBookViewController: UITextViewDelegate {
 //MARK: Preparing View For Dismiss
 extension CreateBookViewController {
     func prepareViewAndDismiss() {
-        UIView.animate(withDuration: 1, animations: {
-            self.view.backgroundColor = .clear
-        }) { (animated) in
-            self.delegate?.dismissView()
-        }
+//        UIView.animate(withDuration: 1, animations: {
+//            self.view.backgroundColor = .clear
+//        }) { (animated) in
+//            self.delegate?.dismissView()
+//        }
+        
+        navigationController?.popViewControllerAsDismiss()
     }
 }

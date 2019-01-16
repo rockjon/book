@@ -106,8 +106,12 @@ extension LoaderViewController {
             ConnectionManager.getArray(of: returnType) { (array) in
                 if array != nil {
                     self.arrayDataSource = array
+                    self.prepareAndDismiss()
+                } else {
+                    Utils.showAlertWithAction(title: "Ups", message: "Hubo un error al cargar los datos :C", context: self, action: UIAlertAction(title: "Ok :c", style: UIAlertAction.Style.default, handler: { (alert) in
+                        self.prepareAndDismiss()
+                    }))
                 }
-                self.prepareAndDismiss()
             }
         }
     }
